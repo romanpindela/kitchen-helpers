@@ -1,6 +1,8 @@
 package com.codecool.kitchenmanagement.employee;
 
+import java.util.Map;
+
 public interface CanRequestIngredient {
 
-    void requestIngredient();
+    Integer requestIngredient( Ingredient i);
 }

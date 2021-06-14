@@ -6,6 +6,7 @@ public enum Ingredient {
     MEAT, POTATO, CARROT;
 
     int getRandomNumber(){
-        return new Random().nextInt(Ingredient.values().length);
+        int i =  new Random().nextInt(Ingredient.values().length);
+        return i;
     }
 }

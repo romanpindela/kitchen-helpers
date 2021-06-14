@@ -11,6 +11,23 @@ public class Kitchen {
     protected Chef chef;
     protected List<Cook> cooks;
     protected List<KitchenHelper> kitchenHelpers;
+
+    public Chef getChef () {
+        return chef;
+    }
+
+    public List<Cook> getCooks () {
+        return cooks;
+    }
+
+    public List<KitchenHelper> getKitchenHelpers () {
+        return kitchenHelpers;
+    }
+
+    public List<Employee> getEmployees () {
+        return employees;
+    }
+
     protected List<Employee> employees;
 
     public Kitchen() {
@@ -51,6 +68,7 @@ public class Kitchen {
     private void hireChef(Employee e) {
         if (chef == null){
             chef = (Chef) e;
+            chef.setKitchen(this);
             provideKnifeSet(e);
         } else {
             fireEmployee(chef);
@@ -179,4 +197,6 @@ public class Kitchen {
             System.out.println(e);
         }
     }
+
+
 }

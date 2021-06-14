@@ -1,18 +1,44 @@
 package com.codecool.kitchenmanagement;
 
-import com.codecool.kitchenmanagement.employee.Chef;
-import com.codecool.kitchenmanagement.employee.Cook;
-import com.codecool.kitchenmanagement.employee.Employee;
-import com.codecool.kitchenmanagement.employee.KitchenHelper;
+import com.codecool.kitchenmanagement.employee.*;
 import com.codecool.kitchenmanagement.kitchen.Kitchen;
 import com.codecool.kitchenmanagement.util.MessageBroker;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    static Kitchen kitchen;
 
+    public static void main(String[] args) {
+        initKitchen();
+
+        String userInput;
+        Scanner scanner = new Scanner(System.in);
+        do {
+            menu();
+            userInput = scanner.nextLine();
+            switch (userInput){
+                case "1": testInitEmployees();
+                case "2": testCookingProcess();
+            }
+
+        } while (!userInput.equals("q"));
+
+
+    }
+
+    private static void testCookingProcess () {
+        for (int i = 0; i < 20; i++) {
+            System.out.println("iteration: " + i);
+            // ((Chef)Chef2).cook();
+            kitchen.produceMeal();
+        }
+    }
+
+    private static void testInitEmployees () {
+        kitchen = new Kitchen();
         Employee Cook1 = new Cook("Andy",LocalDate.parse("1985-04-04"),new BigDecimal(2200));
         Employee Cook2 = new Cook("Andrew",LocalDate.parse("1988-05-03"),new BigDecimal(2100));
         Employee Chef1 = new Chef("Kate",LocalDate.parse("1970-08-10"),new BigDecimal(3200));
@@ -23,8 +49,6 @@ public class Main {
         Employee KitchHelper4 = new KitchenHelper("Bob",LocalDate.parse("1978-02-19"),new BigDecimal(1320));
 
 
-
-        Kitchen kitchen = new Kitchen();
         kitchen.produceMeal();
         MessageBroker.messageConsole("---------------------------------");
 
@@ -40,9 +64,6 @@ public class Main {
 
         kitchen.showEmployees();
         MessageBroker.messageConsole("---------------------------------");
-
-        kitchen.fireEmployee(KitchHelper3);
-        kitchen.fireEmployee(Chef1);
         kitchen.fireEmployee(KitchHelper4);
         kitchen.hireEmployee(Chef2);
 
@@ -50,11 +71,25 @@ public class Main {
         kitchen.showEmployees();
         MessageBroker.messageConsole("---------------------------------");
         kitchen.produceMeal();
+        MessageBroker.messageConsole("---------------------------------");
+
+
+    }
+
+    private static void menu () {
+        System.out.println("Menu:");
+        System.out.println("1. test initializing kitchen's employees");
+        System.out.println("2. test cooking process");
+        System.out.println("q - quit program");
+    }
+
+    private static void initKitchen(){
+
+    }
 
 
 //        System.out.println("Ramsay: WHAT ARE YOU?");
 //        System.out.println("Kitchen helper: An idiot sandwich.");
 //		System.out.println("Ramsay: IDIOT SANDWICH WHAT?");
 //		System.out.println("Kitchen helper: An idiot sandwich, chef Ramsay.");
-    }
 }
